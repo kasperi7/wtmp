@@ -20,7 +20,7 @@ const langButton = document.querySelector(".langButton");
 const sortButton = document.querySelector(".sortButton");
 const randButton = document.querySelector(".randButton");
 const courses = document.querySelector(".courses");
-const randomDish = document.querySelector(".randomCourse");
+const randomCourse = document.querySelector(".randomCourse");
 
 const finnishMenu = () => {
   courses.innerHTML = "";
@@ -43,7 +43,7 @@ const englishMenu = () => {
 
 let finnish = 1;
 const lang = () => {
-  randomDish.innerHTML = "";
+  randomCourse.innerHTML = "";
   if (finnish) {
     englishMenu();
     finnish = false;
@@ -56,7 +56,7 @@ const lang = () => {
 coursesEn.sort();
 coursesFi.sort();
 const sortCourses = () => {
-  randomDish.innerHTML = "";
+  randomCourse.innerHTML = "";
   if (finnish) {
     coursesFi.reverse();
     finnishMenu();
@@ -69,12 +69,12 @@ const sortCourses = () => {
 const randCourse = () => {
   const randomize = Math.floor(Math.random() * coursesFi.length);
   if (finnish) {
-    randomDish.innerHTML = "";
-    randomDish.innerHTML += `
+    randomCourse.innerHTML = "";
+    randomCourse.innerHTML += `
     <p>${coursesFi[randomize]}</p>`;
   } else {
-    randomDish.innerHTML = "";
-    randomDish.innerHTML += `
+    randomCourse.innerHTML = "";
+    randomCourse.innerHTML += `
     <p>${coursesEn[randomize]}</p>`;
   }
 };
