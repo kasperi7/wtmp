@@ -1,21 +1,11 @@
 html {
-  font-family: sans-serif;
   background-color: darkseagreen;
 }
-
 body {
-  padding: 50px;
-  width: 50%;
-  max-width: 800px;
-  min-width: 480px;
-  margin: 0 auto;
   background-color: beige;
-  border-radius: 0 0 10px 10px;
-}
-
-.lastResult {
-  color: white;
-  padding: 3px;
+  padding: 15px;
+  margin: auto;
+  width: 50%;
 }
 h1 {
   text-align: center;
