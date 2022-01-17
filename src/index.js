@@ -20,7 +20,7 @@ const langButton = document.querySelector(".langButton");
 const sortButton = document.querySelector(".sortButton");
 const randButton = document.querySelector(".randButton");
 const courses = document.querySelector(".courses");
-const randomDish = document.querySelector(".randomDish");
+const randomDish = document.querySelector(".randomCourse");
 
 const finnishMenu = () => {
   courses.innerHTML = "";
