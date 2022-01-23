@@ -10,3 +10,8 @@ body {
 h1 {
   text-align: center;
 }
+.fazerMenu,
+.sodexoMenu {
+  border-bottom: 2px solid darkseagreen;
+  padding: 10px;
+}

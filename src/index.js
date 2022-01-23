@@ -1,77 +1,142 @@
-import LunchMenu from "../sodexo-day-example.json";
-console.log("lunch menu object", LunchMenu);
+import SodexoData from "./modules/sodexo-data";
+import FazerData from "./modules/fazer-data";
 
-const coursesEn = [];
-const coursesFi = [];
+const sodexoCoursesEn = SodexoData.coursesEn;
+const sodexoCoursesFi = SodexoData.coursesFi;
+const fazerCoursesEn = FazerData.coursesEn;
+const fazerCoursesFi = FazerData.coursesFi;
 
-for (let i in LunchMenu.courses) {
-  coursesFi.push(LunchMenu.courses[i].title_fi);
-  coursesEn.push(LunchMenu.courses[i].title_en);
-}
+const langButtonSodexo = document.querySelector(".langButtonSodexo");
+const sortButtonSodexo = document.querySelector(".sortButtonSodexo");
+const randButtonSodexo = document.querySelector(".randButtonSodexo");
+const coursesSodexo = document.querySelector(".coursesSodexo");
+const randomCourseSodexo = document.querySelector(".randomCourseSodexo");
+const langButtonFazer = document.querySelector(".langButtonFazer");
+const sortButtonFazer = document.querySelector(".sortButtonFazer");
+const randButtonFazer = document.querySelector(".randButtonFazer");
+const coursesFazer = document.querySelector(".coursesFazer");
+const randomCourseFazer = document.querySelector(".randomCourseFazer");
 
-const langButton = document.querySelector(".langButton");
-const sortButton = document.querySelector(".sortButton");
-const randButton = document.querySelector(".randButton");
-const courses = document.querySelector(".courses");
-const randomCourse = document.querySelector(".randomCourse");
+const finnishMenuSodexo = () => {
+  coursesSodexo.innerHTML = "";
+  for (let i = 0; i < sodexoCoursesFi.length; i++) {
+    coursesSodexo.innerHTML += `
+        <li>${sodexoCoursesFi[i]}</li>
+        `;
+  }
+};
+finnishMenuSodexo();
 
-const finnishMenu = () => {
-  courses.innerHTML = "";
-  for (let i = 0; i < coursesFi.length; i++) {
-    courses.innerHTML += `
-        <li>${coursesFi[i]}</li>
+const englishMenuSodexo = () => {
+  coursesSodexo.innerHTML = "";
+  for (let i = 0; i < sodexoCoursesEn.length; i++) {
+    coursesSodexo.innerHTML += `
+        <li>${sodexoCoursesEn[i]}</li>
         `;
   }
 };
 
-finnishMenu();
-const englishMenu = () => {
-  courses.innerHTML = "";
-  for (let i = 0; i < coursesEn.length; i++) {
-    courses.innerHTML += `
-        <li>${coursesEn[i]}</li>
+const finnishMenuFazer = () => {
+  coursesFazer.innerHTML = "";
+  for (let i = 0; i < fazerCoursesFi.length; i++) {
+    coursesFazer.innerHTML += `
+        <li>${fazerCoursesFi[i]}</li>
+        `;
+  }
+};
+finnishMenuFazer();
+
+const englishMenuFazer = () => {
+  coursesFazer.innerHTML = "";
+  for (let i = 0; i < fazerCoursesEn.length; i++) {
+    coursesFazer.innerHTML += `
+        <li>${fazerCoursesEn[i]}</li>
         `;
   }
 };
 
-let finnish = 1;
-const lang = () => {
-  randomCourse.innerHTML = "";
-  if (finnish) {
-    englishMenu();
-    finnish = false;
+//language
+let fazerFinnish = 1;
+let sodexoFinnish = 1;
+const langSodexo = () => {
+  randomCourseSodexo.innerHTML = "";
+  if (sodexoFinnish) {
+    englishMenuSodexo();
+    sodexoFinnish = false;
   } else {
-    finnishMenu();
-    finnish = true;
+    finnishMenuSodexo();
+    sodexoFinnish = true;
+  }
+};
+const langFazer = () => {
+  randomCourseFazer.innerHTML = "";
+  if (fazerFinnish) {
+    englishMenuFazer();
+    fazerFinnish = false;
+  } else {
+    finnishMenuFazer();
+    fazerFinnish = true;
   }
 };
 
-coursesEn.sort();
-coursesFi.sort();
-const sortCourses = () => {
-  randomCourse.innerHTML = "";
-  if (finnish) {
-    coursesFi.reverse();
-    finnishMenu();
+//sort
+sodexoCoursesEn.sort();
+sodexoCoursesFi.sort();
+fazerCoursesEn.sort();
+fazerCoursesFi.sort();
+const sortCoursesSodexo = () => {
+  randomCourseSodexo.innerHTML = "";
+  if (sodexoFinnish) {
+    sodexoCoursesFi.reverse();
+    finnishMenuSodexo();
   } else {
-    coursesEn.reverse();
-    englishMenu();
+    sodexoCoursesEn.reverse();
+    englishMenuSodexo();
   }
 };
 
-const randCourse = () => {
-  const randomize = Math.floor(Math.random() * coursesFi.length);
-  if (finnish) {
-    randomCourse.innerHTML = "";
-    randomCourse.innerHTML += `
-      <p>${coursesFi[randomize]}</p>`;
+const sortCoursesFazer = () => {
+  randomCourseFazer.innerHTML = "";
+  if (fazerFinnish) {
+    fazerCoursesFi.reverse();
+    finnishMenuFazer();
   } else {
-    randomCourse.innerHTML = "";
-    randomCourse.innerHTML += `
-      <p>${coursesEn[randomize]}</p>`;
+    fazerCoursesEn.reverse();
+    englishMenuFazer();
   }
 };
 
-langButton.addEventListener("click", lang);
-sortButton.addEventListener("click", sortCourses);
-randButton.addEventListener("click", randCourse);
+//randomize
+const randCourseSodexo = () => {
+  const randomizeSodexo = Math.floor(Math.random() * sodexoCoursesFi.length);
+  if (sodexoFinnish) {
+    randomCourseSodexo.innerHTML = "";
+    randomCourseSodexo.innerHTML += `
+      <p>${sodexoCoursesFi[randomizeSodexo]}</p>`;
+  } else {
+    randomCourseSodexo.innerHTML = "";
+    randomCourseSodexo.innerHTML += `
+      <p>${sodexoCoursesFi[randomizeSodexo]}</p>`;
+  }
+};
+
+const randCourseFazer = () => {
+  const randomizeFazer = Math.floor(Math.random() * fazerCoursesFi.length);
+  if (fazerFinnish) {
+    randomCourseFazer.innerHTML = "";
+    randomCourseFazer.innerHTML += `
+      <p>${fazerCoursesFi[randomizeFazer]}</p>`;
+  } else {
+    randomCourseFazer.innerHTML = "";
+    randomCourseFazer.innerHTML += `
+      <p>${fazerCoursesFi[randomizeFazer]}</p>`;
+  }
+};
+
+//buttons
+langButtonSodexo.addEventListener("click", langSodexo);
+sortButtonSodexo.addEventListener("click", sortCoursesSodexo);
+randButtonSodexo.addEventListener("click", randCourseSodexo);
+langButtonFazer.addEventListener("click", langFazer);
+sortButtonFazer.addEventListener("click", sortCoursesFazer);
+randButtonFazer.addEventListener("click", randCourseFazer);
