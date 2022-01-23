@@ -1,3 +1,5 @@
+/* Algoritmi aloittaa keskimmäisestä luvusta (50) ja jatkaa puolittamalla jäljellä olevat luvut. Jos luku on suurempi kuin 50, algoritmi syöttää seuraavaksi luvun 75, joka on puolessa välissä jäljellä olevia lukuja. */
+
 const maxNumber = 100;
 const minNumber = 1;
 const maxGuesses = 10;
@@ -15,11 +17,59 @@ const guessField = document.querySelector(".guessField");
 
 const timer = document.querySelector(".aika");
 const totalGuesses = document.querySelector(".arvaukset");
+const solveButton = document.querySelector("#solveButton");
+const guessedNumbers = document.querySelector(".guessedNumbers");
+const solution = document.querySelector(".solution");
 
 let guessCount = 1;
 let resetButton;
 let startTime = Date.now();
+let counter = 0;
+let array = [];
 
+const solver = (higherNumber, lowerNumber) => {
+  const guess = Math.floor((higherNumber + lowerNumber) / 2);
+  let highNumber, lowNumber;
+
+  array.push(guess);
+  if (guess === randomNumber) {
+    counter++;
+    return;
+  } else if (guess > randomNumber) {
+    highNumber = guess - 1;
+    lowNumber = lowerNumber;
+    counter++;
+  } else {
+    highNumber = higherNumber;
+    lowNumber = guess + 1;
+    counter++;
+  }
+  try {
+    solver(highNumber, lowNumber);
+  } catch (e) {}
+};
+
+solveButton.addEventListener("click", () => {
+  const solveNumber = document.createElement("button");
+  solveNumber.addEventListener("click", solver(maxNumber, minNumber));
+
+  guessedNumbers.innerHTML = "";
+  array.forEach((guess) => {
+    const p = document.createElement("p");
+    p.innerHTML = guess;
+    guessedNumbers.appendChild(p);
+  });
+  solution.innerHTML = "Solution: " + array[array.length - 1];
+  totalGuesses.innerHTML = "Guesses: " + array.length;
+
+  //Clear array and randomize new number
+  array = [];
+  randomNumber = Math.floor(
+    Math.random() * (maxNumber + minNumber) + minNumber
+  );
+});
+
+// VALMISTA OMAA KOODIA ALASPÄIN
 const stopTimer = () => {
   const endTime = Date.now() - startTime;
   timer.textContent +=
